@@ -1,0 +1,27 @@
+---
+
+name: Update Shared Minecraft Asset Cache
+description: Creates or updates a shared Github Actions Cache for Minecraft Assets
+author: Neoforged
+
+inputs:
+  github-token:
+    description: Token with the ability to delete a previous version of the cache. By default GITHUB_TOKEN is used.
+    default: ${{ github.token }}
+
+  cache-key:
+    description: The cache key to use for the shared Minecraft assets cache.
+    default: minecraft-assets
+
+  minecraft-versions:
+    description: The Minecraft versions that are relevant to the project and which will be included in the asset cache. Use one line per Minecraft version.
+
+  minecraft-version-file:
+    description: In combination with minecraft-version-regexp, the action will to lookup the current Minecraft version used from this file. Any discovered Minecraft version will be combined with the versions specified in minecraft-versions.
+
+  minecraft-version-regexp:
+    description: A regular expression that is used to find a Minecraft version in the file specified by minecraft-version-file. The regular expression will be evaluated against the entire file. Give the regular expression in the form /.../flags.
+
+runs:
+  using: node20
+  main: dist/index.js

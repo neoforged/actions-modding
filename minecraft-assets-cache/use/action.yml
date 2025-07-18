@@ -1,0 +1,30 @@
+---
+
+name: Use Shared Minecraft Asset Cache
+description: Uses a shared Github Actions Cache for Minecraft Assets
+author: Neoforged
+
+inputs:
+  assets-folder:
+    description: Where downloaded Minecraft assets should be stored
+    default: ~/.minecraft/assets
+
+  cache-key:
+    description: The cache key to use for the shared Minecraft assets cache
+    default: minecraft-assets
+
+runs:
+  using: "composite"
+  steps:
+    - name: Restore Minecraft Assets from Cache
+      uses: actions/cache/restore@v4
+      id: cache-restore
+      with:
+        path: ${{ inputs.assets-folder }}
+        key: ${{ inputs.cache-key }}
+        restore-keys: ${{ inputs.cache-key }}-
+
+    - name: Set assets folder environment variable for subsequent NFRT runs
+      shell: bash
+      run: |
+        echo "NFRT_ASSET_ROOT=${{ inputs.assets-folder }}" >> "$GITHUB_ENV"

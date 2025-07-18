@@ -1,0 +1,10 @@
+{
+  "private": true,
+  "workspaces": [
+    "minecraft-assets-cache/create"
+  ],
+  "scripts": {
+    "build": "npm run build --workspaces --if-present",
+    "format": "npm run format --workspaces --if-present"
+  }
+}
