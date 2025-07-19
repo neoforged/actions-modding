@@ -1,0 +1,12 @@
+name: NeoForged Modding Actions
+description: A collection of GitHub Actions useful for modding workflows
+author: NeoForged
+
+runs:
+  using: composite
+  steps:
+  - name: Warn about improper use
+    run: |
+      echo "Use a specific action from a subfolder"
+      exit 1
+    shell: bash
